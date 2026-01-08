@@ -1,0 +1,944 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Use @title: '...' on your CDS service to provide a meaningful title.",
+    "description": "Use @Core.LongDescription: '...' or @Core.Description: '...' on your CDS service to provide a meaningful description.",
+    "version": ""
+  },
+  "x-sap-api-type": "ODATAV4",
+  "x-odata-version": "4.01",
+  "x-sap-shortText": "Use @Core.Description: '...' on your CDS service to provide a meaningful short text.",
+  "servers": [
+    {
+      "url": "/S4Service"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Project Portfolio"
+    },
+    {
+      "name": "Project Portfolio Bucket"
+    },
+    {
+      "name": "Project Portfolio Item"
+    }
+  ],
+  "paths": {
+    "/$batch": {
+      "post": {
+        "summary": "Sends a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+        "tags": [
+          "Batch Requests"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Batch request",
+          "content": {
+            "multipart/mixed;boundary=request-separator": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET ProjectPortfolio HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch response",
+            "content": {
+              "multipart/mixed": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProjectPortfolio": {
+      "get": {
+        "summary": "Retrieves a list of project portfolio.",
+        "tags": [
+          "Project Portfolio"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "ExplanationText",
+                  "ExplanationText desc",
+                  "Description",
+                  "Description desc",
+                  "CreatedBy",
+                  "CreatedBy desc",
+                  "CreationDate",
+                  "CreationDate desc",
+                  "LastChangedBy",
+                  "LastChangedBy desc",
+                  "LastChangedDate",
+                  "LastChangedDate desc",
+                  "Type",
+                  "Type desc",
+                  "ReleaseStatus",
+                  "ReleaseStatus desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ExplanationText",
+                  "Description",
+                  "CreatedBy",
+                  "CreationDate",
+                  "LastChangedBy",
+                  "LastChangedDate",
+                  "Type",
+                  "ReleaseStatus"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved project portfolio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProjectPortfolio",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/S4Service.ProjectPortfolio"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProjectPortfolio({ID})": {
+      "parameters": [
+        {
+          "description": "key: ID",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single project portfolio.",
+        "tags": [
+          "Project Portfolio"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ExplanationText",
+                  "Description",
+                  "CreatedBy",
+                  "CreationDate",
+                  "LastChangedBy",
+                  "LastChangedDate",
+                  "Type",
+                  "ReleaseStatus"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved project portfolio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/S4Service.ProjectPortfolio"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProjectPortfolioBucket": {
+      "get": {
+        "summary": "Retrieves a list of project portfolio bucket.",
+        "tags": [
+          "Project Portfolio Bucket"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "ExternalID",
+                  "ExternalID desc",
+                  "ProjectPortfolioID",
+                  "ProjectPortfolioID desc",
+                  "Parent",
+                  "Parent desc",
+                  "Description",
+                  "Description desc",
+                  "ReleaseStatus",
+                  "ReleaseStatus desc",
+                  "Currency",
+                  "Currency desc",
+                  "CreatedBy",
+                  "CreatedBy desc",
+                  "CreationDate",
+                  "CreationDate desc",
+                  "CapacityPlanningStartDate",
+                  "CapacityPlanningStartDate desc",
+                  "CapacityPlanningEndDate",
+                  "CapacityPlanningEndDate desc",
+                  "FinancialPlanStartDate",
+                  "FinancialPlanStartDate desc",
+                  "FinancialPlanEndDate",
+                  "FinancialPlanEndDate desc",
+                  "LastChangedBy",
+                  "LastChangedBy desc",
+                  "LastChangedDate",
+                  "LastChangedDate desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ExternalID",
+                  "ProjectPortfolioID",
+                  "Parent",
+                  "Description",
+                  "ReleaseStatus",
+                  "Currency",
+                  "CreatedBy",
+                  "CreationDate",
+                  "CapacityPlanningStartDate",
+                  "CapacityPlanningEndDate",
+                  "FinancialPlanStartDate",
+                  "FinancialPlanEndDate",
+                  "LastChangedBy",
+                  "LastChangedDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved project portfolio bucket",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProjectPortfolioBucket",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/S4Service.ProjectPortfolioBucket"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProjectPortfolioBucket({ID})": {
+      "parameters": [
+        {
+          "description": "key: ID",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single project portfolio bucket.",
+        "tags": [
+          "Project Portfolio Bucket"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ExternalID",
+                  "ProjectPortfolioID",
+                  "Parent",
+                  "Description",
+                  "ReleaseStatus",
+                  "Currency",
+                  "CreatedBy",
+                  "CreationDate",
+                  "CapacityPlanningStartDate",
+                  "CapacityPlanningEndDate",
+                  "FinancialPlanStartDate",
+                  "FinancialPlanEndDate",
+                  "LastChangedBy",
+                  "LastChangedDate"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved project portfolio bucket",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/S4Service.ProjectPortfolioBucket"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProjectPortfolioItem": {
+      "get": {
+        "summary": "Retrieves a list of project portfolio item.",
+        "tags": [
+          "Project Portfolio Item"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ID desc",
+                  "ProjectPortfolioItem",
+                  "ProjectPortfolioItem desc",
+                  "ItemDescription",
+                  "ItemDescription desc",
+                  "ProjectPortfolioID",
+                  "ProjectPortfolioID desc",
+                  "Parent",
+                  "Parent desc",
+                  "Currency",
+                  "Currency desc",
+                  "ItemType",
+                  "ItemType desc",
+                  "ItemLocation",
+                  "ItemLocation desc",
+                  "ItemGeography",
+                  "ItemGeography desc",
+                  "Status",
+                  "Status desc",
+                  "PlannedStartDate",
+                  "PlannedStartDate desc",
+                  "PlannedEndDate",
+                  "PlannedEndDate desc",
+                  "BudgetTotalAmount",
+                  "BudgetTotalAmount desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ProjectPortfolioItem",
+                  "ItemDescription",
+                  "ProjectPortfolioID",
+                  "Parent",
+                  "Currency",
+                  "ItemType",
+                  "ItemLocation",
+                  "ItemGeography",
+                  "Status",
+                  "PlannedStartDate",
+                  "PlannedEndDate",
+                  "BudgetTotalAmount"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved project portfolio item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of ProjectPortfolioItem",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/S4Service.ProjectPortfolioItem"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/ProjectPortfolioItem({ID})": {
+      "parameters": [
+        {
+          "description": "key: ID",
+          "in": "path",
+          "name": "ID",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single project portfolio item.",
+        "tags": [
+          "Project Portfolio Item"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ID",
+                  "ProjectPortfolioItem",
+                  "ItemDescription",
+                  "ProjectPortfolioID",
+                  "Parent",
+                  "Currency",
+                  "ItemType",
+                  "ItemLocation",
+                  "ItemGeography",
+                  "Status",
+                  "PlannedStartDate",
+                  "PlannedEndDate",
+                  "BudgetTotalAmount"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved project portfolio item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/S4Service.ProjectPortfolioItem"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "S4Service.ProjectPortfolio": {
+        "title": "ProjectPortfolio",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          },
+          "ExplanationText": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "Description": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "CreatedBy": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "CreationDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "LastChangedBy": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "LastChangedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04Z",
+            "nullable": true
+          },
+          "Type": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "ReleaseStatus": {
+            "type": "string",
+            "maxLength": 5
+          }
+        }
+      },
+      "S4Service.ProjectPortfolioBucket": {
+        "title": "ProjectPortfolioBucket",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          },
+          "ExternalID": {
+            "type": "string",
+            "maxLength": 24
+          },
+          "ProjectPortfolioID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          },
+          "Parent": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "ReleaseStatus": {
+            "type": "string",
+            "maxLength": 5
+          },
+          "Currency": {
+            "type": "string",
+            "maxLength": 5
+          },
+          "CreatedBy": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "CreationDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "CapacityPlanningStartDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "CapacityPlanningEndDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "FinancialPlanStartDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "FinancialPlanEndDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "LastChangedBy": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "LastChangedDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04Z",
+            "nullable": true
+          }
+        }
+      },
+      "S4Service.ProjectPortfolioItem": {
+        "title": "ProjectPortfolioItem",
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          },
+          "ProjectPortfolioItem": {
+            "type": "string",
+            "maxLength": 24
+          },
+          "ItemDescription": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "ProjectPortfolioID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef"
+          },
+          "Parent": {
+            "type": "string",
+            "format": "uuid",
+            "example": "01234567-89ab-cdef-0123-456789abcdef",
+            "nullable": true
+          },
+          "Currency": {
+            "type": "string",
+            "maxLength": 5
+          },
+          "ItemType": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "ItemLocation": {
+            "type": "string",
+            "maxLength": 4
+          },
+          "ItemGeography": {
+            "type": "string",
+            "maxLength": 4
+          },
+          "Status": {
+            "type": "string",
+            "maxLength": 5
+          },
+          "PlannedStartDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "PlannedEndDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2017-04-13",
+            "nullable": true
+          },
+          "BudgetTotalAmount": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "decimal"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": 0,
+            "x-sap-precision": 16
+          }
+        }
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "innererror": {
+                "type": "object",
+                "description": "The structure of this object is service-specific"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "top": {
+        "name": "$top",
+        "in": "query",
+        "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "example": 50
+      },
+      "skip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "count": {
+        "name": "$count",
+        "in": "query",
+        "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "search": {
+        "name": "$search",
+        "in": "query",
+        "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

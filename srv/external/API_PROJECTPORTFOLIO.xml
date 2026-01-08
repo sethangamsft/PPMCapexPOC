@@ -1,0 +1,2332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+    xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.api_projectportfolio.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="PrjPrtfloItemFinancialPlan_Type">
+                <Key>
+                    <PropertyRef Name="PrjPrtfloItmFinPlnUUID"/>
+                    <PropertyRef Name="PrjPrtfloItmFinancialPlanType"/>
+                    <PropertyRef Name="FiscalYear"/>
+                    <PropertyRef Name="FiscalPeriod"/>
+                    <PropertyRef Name="PrjPrtfloItmFinPlnCategoryUUID"/>
+                </Key>
+                <Property Name="PrjPrtfloItmFinPlnUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloItmFinancialPlanType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="PrjPrtfloItmFinPlnCategoryUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloItmFinPlanPeriodDate" Type="Edm.Date"/>
+                <Property Name="PrjPrtfloFinPlnPeriodIsInitial" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloItmFinPlnChgdDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="PrjPrtfloItmFinPlanChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="PrjPrtfloItmFinPlanAmount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="PrjPrtfloItmFinPlanCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="PrjPrtfloItmFinPlnCategoryId" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="PrjPrtfloItmFinPlnCatIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloItmFinPlnCatIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioItemUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloItmFinPlnGroupId" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="PrjPrtfloItmFinPlnGrpSponsor" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="PrjPrtfloItmFinPlnGrpIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloItmFinPlnGrpIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.SAP__Message)" Nullable="false"/>
+                <NavigationProperty Name="_Item" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioItem_Type" Nullable="false" Partner="_FinancialPlan">
+                    <ReferentialConstraint Property="ProjectPortfolioItemUUID" ReferencedProperty="ProjectPortfolioItemUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ProjPortfolioItemObjectLink_Type">
+                <Key>
+                    <PropertyRef Name="ProjectPortfolioObjectLinkUUID"/>
+                </Key>
+                <Property Name="ProjectPortfolioObjectLinkUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ProjectPortfolioObjectUUID" Type="Edm.Guid"/>
+                <Property Name="ObjectLinkType" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="PrjPrtfloObjLnkObjectKeyValue" Type="Edm.String" Nullable="false"/>
+                <Property Name="PrjPrtfloObjectLinkDescription" Type="Edm.String" Nullable="false"/>
+                <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="CreatedOnDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="PrjPrtfloObjectLinkIsCtrlgLink" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloObjectLinkIsDFMLink" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioItemUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloObjLinkLogicalSystem" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="_Item" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioItem_Type" Nullable="false" Partner="_ObjectLink">
+                    <ReferentialConstraint Property="ProjectPortfolioItemUUID" ReferencedProperty="ProjectPortfolioItemUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ProjectPortfolioDecisionPoint_Type">
+                <Key>
+                    <PropertyRef Name="ProjPrtfloItmDcsnPointUUID"/>
+                </Key>
+                <Property Name="ProjPrtfloItmDcsnPointUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ProjPrtfloItemDecisionPoint" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="PrtfloItmDcsnPointDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProjectPortfolioItemUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="ProjPrtfloItemDcsnPtChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="ProjPrtfloItmDcsnPtPlndStrtDte" Type="Edm.Date"/>
+                <Property Name="PrtfloItmDcsnPtPlndFinishDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItmDcsnPtActlStrtDte" Type="Edm.Date"/>
+                <Property Name="PrtfloItmDcsnPtActlFinishDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItmDcsnPointStatus" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="ProjPrtfloItmDcsnPointIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloItmDcsnPtFcstdStrtDte" Type="Edm.Date"/>
+                <Property Name="PrtfloItmDcsnPtFcstdFinishDate" Type="Edm.Date"/>
+                <Property Name="PrtfloItmDcsnPointDecisionDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItmDcsnPtPlndDcsnDte" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItmDcsnPtActlDcsnDte" Type="Edm.Date"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_PortfolioItem" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioItem_Type" Nullable="false" Partner="_DecisionPoint">
+                    <ReferentialConstraint Property="ProjectPortfolioItemUUID" ReferencedProperty="ProjectPortfolioItemUUID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PrjPrtfloBucketFinancialPlan_Type">
+                <Key>
+                    <PropertyRef Name="PrjPrtfloBcktFinPlnType"/>
+                    <PropertyRef Name="FiscalYear"/>
+                    <PropertyRef Name="FiscalPeriod"/>
+                    <PropertyRef Name="PrjPrtfloBcktFinPlanUUID"/>
+                    <PropertyRef Name="PrjPrtfloBcktFinPlnCatUUID"/>
+                </Key>
+                <Property Name="PrjPrtfloBcktFinPlnType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="PrjPrtfloBcktFinPlanUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktFinPlnCatUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktFinPlnPeriodDate" Type="Edm.Date"/>
+                <Property Name="PrjPrtfloFinPlnPeriodIsInitial" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktFinPlnCategoryId" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="PrjPrtfloBcktFinPlnCatIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktFinPlnCatIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioBucketUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktFinPlnGroupId" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="PrjPrtfloBcktFinPlnGrpSponsor" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="PrjPrtfloBcktFinPlnGrpIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktFinPlnGrpIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktFinPlnChgdDteTme" Type="Edm.DateTimeOffset"/>
+                <Property Name="PrjPrtfloBcktFinPlnChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="PrjPrtfloBcktFinPlnAmount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="PrjPrtfloBcktFinPlnCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.SAP__Message)" Nullable="false"/>
+                <NavigationProperty Name="_Bucket" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioBucket_Type" Nullable="false" Partner="_FinancialPlan">
+                    <ReferentialConstraint Property="ProjectPortfolioBucketUUID" ReferencedProperty="ProjectPortfolioBucketUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ProjectPortfolioBucket_Type">
+                <Key>
+                    <PropertyRef Name="ProjectPortfolioBucketUUID"/>
+                </Key>
+                <Property Name="ProjectPortfolioBucketUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ProjPortfolioBucketExternalID" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ParentObjectUUID" Type="Edm.Guid"/>
+                <Property Name="ProjPortfolioBucketDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProjPrtfloBcktFinCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="ProjPrtfloBcktFinPlngPerdType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPrtfloBucketCapacityUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="ProjPrtfloBucketReleaseStatus" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="ProjPrtfloBcktCapPlngStartDate" Type="Edm.Date"/>
+                <Property Name="PrjPrtfloBcktCapPlngFinishDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloBcktFinPlngStartDate" Type="Edm.Date"/>
+                <Property Name="PrjPrtfloBcktFinPlngFinishDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloBcktCapPlngPerdType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPrtfloBcktTransfStartDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloBcktTransfFinishDate" Type="Edm.Date"/>
+                <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="ProjPrtfloBucketCreatedOnDate" Type="Edm.Date"/>
+                <NavigationProperty Name="_CapacityPlan" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPrtfloBucketCapacityPlan_Type)" Partner="_Bucket">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_FinancialPlan" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPrtfloBucketFinancialPlan_Type)" Partner="_Bucket">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false" Partner="_Bucket">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_PortfolioItem" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioItem_Type)" Partner="_Bucket">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ProjectPortfolioItem_Type">
+                <Key>
+                    <PropertyRef Name="ProjectPortfolioItemUUID"/>
+                </Key>
+                <Property Name="ProjectPortfolioItemUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ProjectPortfolioItem" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="ProjPortfolioItemDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ProjPrtfloItemParentObjectUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ProjectPortfolioItemCategory" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPortfolioItemSubcategory" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjectPortfolioItemStage" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjectPortfolioItemGroup" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPrtfloItemTechnologyType" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPrtfloItmAssessedRiskValue" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProjPrtfloItmProbltyTechSuccss" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProjPrtfloItmProbltyCommSuccss" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProjPrtfloItemHeadcountValue" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="2"/>
+                <Property Name="ProjPrtfloItemDevelopmentCost" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjectPortfolioItemLaunchCost" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmNPVAmount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjectPortfolioItemCurrency" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="ProjectPortfolioItemLocation" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjectPortfolioItemGeography" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="ProjPrtfloItmFinPeriodType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPortfolioItemCapacityUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProjPrtfloItmFcstdStartDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItmPlannedStartDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItemActualStartDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItmFcstdFinishDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItmPlannedFinishDate" Type="Edm.Date"/>
+                <Property Name="ProjPrtfloItemActualFinishDate" Type="Edm.Date"/>
+                <Property Name="ProjPortfolioItemIsEscalated" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioItemType" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="ProjPortfolioItemHeaderUUID" Type="Edm.Guid"/>
+                <Property Name="ProjPrtfloItmExpdCommlValueAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPortfolioItemPriorityGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjectPortfolioItemChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="ProjPrtfloItemClassification" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ProjectPortfolioItemStatus" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="ProjPrtfloItmCapPlngPerdType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPortfolioItemDiscountRate" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="2"/>
+                <Property Name="ProjPrtfloDcsnPointActiveUUID" Type="Edm.Guid"/>
+                <Property Name="ProjPrtfloItmFcstdBdgtTotAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmFcstdBdgtAnnAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmFcstdCostTotAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItemYTDFcstdCost" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPortfolioItemTemplateUUID" Type="Edm.Guid"/>
+                <Property Name="ProjPortfolioItemRiskPercent" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProjectPortfolioItemRiskGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjectPortfolioItemRiskIcon" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPortfolioItemDerivedRisk" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ProjPrtfloItemActualHeadNmbrOf" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="2"/>
+                <Property Name="ProjPortfolioItemPriorityIcon" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPortfolioItemPhaseIcon" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjectPortfolioItemBudgetIcon" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPortfolioItemScheduleIcon" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPortfolioItemStaffingIcon" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPrtfloItmBudgetTotalAmount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmBdgtAnnualAmount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPortfolioItemPlannedCost" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItemYTDPlannedCost" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjectPortfolioItemActualCost" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmYTDActualCost" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjectPortfolioItemIsProposal" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjPortfolioItemStatusGroup" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPrtfloItemWorkEffortTotal" Type="Edm.Decimal" Nullable="false" Precision="26" Scale="8"/>
+                <Property Name="ProjPrtfloItmYTDWorkEffort" Type="Edm.Decimal" Nullable="false" Precision="26" Scale="8"/>
+                <Property Name="ProjectPortfolioItemWorkEffort" Type="Edm.Decimal" Nullable="false" Precision="26" Scale="8"/>
+                <Property Name="ProjPrtfloItemYTDPlannedEffort" Type="Edm.Decimal" Nullable="false" Precision="26" Scale="8"/>
+                <Property Name="ProjPrtfloItmRetOnInvmtAmount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmIntRateOfRetAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItemDerivedRiskGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPrtfloItemDerivedRiskIcon" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="ProjPrtfloItmFcstdDuration" Type="Edm.Decimal" Nullable="false" Precision="4"/>
+                <Property Name="ProjPrtfloItemPlannedDuration" Type="Edm.Decimal" Nullable="false" Precision="4"/>
+                <Property Name="ProjPrtfloItemActualDuration" Type="Edm.Decimal" Nullable="false" Precision="4"/>
+                <Property Name="ProjPrtfloItmStfngStatusGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPrtfloItmBudgetStatusGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPrtfloItmSchedStatusGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="ProjPrtfloItmPlndRevenueAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmYTDPlannedRevenue" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPortfolioItemActualRevenue" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItemYTDActualRevenue" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmNPVPlanAmount" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmIntRateRetPlanAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItmRetOnInvmtPlanAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <Property Name="ProjPrtfloItemPaybackPlanValue" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="PrjPrtfloItmExpdCommlValPlnAmt" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
+                <NavigationProperty Name="_Bucket" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioBucket_Type" Nullable="false" Partner="_PortfolioItem">
+                    <ReferentialConstraint Property="ProjPrtfloItemParentObjectUUID" ReferencedProperty="ProjectPortfolioBucketUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_CapacityPlan" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPortfolioItemCapacityPlan_Type)" Partner="_Item">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_DecisionPoint" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioDecisionPoint_Type)" Partner="_PortfolioItem">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_FinancialPlan" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPrtfloItemFinancialPlan_Type)" Partner="_Item">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_ObjectLink" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.ProjPortfolioItemObjectLink_Type)" Partner="_Item">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ProjectPortfolio_Type">
+                <Key>
+                    <PropertyRef Name="ProjectPortfolioUUID"/>
+                </Key>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ProjectPortfolioExternalID" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="ParentObjectUUID" Type="Edm.Guid"/>
+                <Property Name="ProjPortfolioExplanationText" Type="Edm.String" Nullable="false" MaxLength="60"/>
+                <Property Name="ProjectPortfolioDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="ProjectPortfolioType" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="ProjectPortfolioReleaseStatus" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="PrjPrtfloIsClsfctnHierarchy" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ProjPrtfloHierarchyIsMandatory" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="ProjectPortfolioMasterLanguage" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="ProjectPortfolioCreatedOnDate" Type="Edm.Date"/>
+                <NavigationProperty Name="_Bucket" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioBucket_Type)" Partner="_Portfolio">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PrjPortfolioItemCapacityPlan_Type">
+                <Key>
+                    <PropertyRef Name="PrjPrtfloItmCapacityPlanUUID"/>
+                    <PropertyRef Name="PrjPrtfloItmCapacityPlanType"/>
+                    <PropertyRef Name="FiscalYear"/>
+                    <PropertyRef Name="FiscalPeriod"/>
+                    <PropertyRef Name="PrjPrtfloItmCapPlnCategoryUUID"/>
+                </Key>
+                <Property Name="PrjPrtfloItmCapacityPlanUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloItmCapacityPlanType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="PrjPrtfloItmCapPlnCategoryUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloItmCapPlanPeriodDate" Type="Edm.Date"/>
+                <Property Name="PrjPrtfloItmCapPlnChgdDateTime" Type="Edm.DateTimeOffset"/>
+                <Property Name="PrjPrtfloItmCapPlnChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="PrjPrtfloItmCapacityPlanAmount" Type="Edm.Decimal" Nullable="false" Precision="26" Scale="8"/>
+                <Property Name="PrjPrtfloItmCapacityPlanUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="PrjPrtfloItmCapPlnCategoryId" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="PrjPrtfloItmCapPlnCatIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloItmCapPlnCatIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioItemUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloItmCapPlnGroupId" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="PrjPrtfloItmCapPlnGrpSponsor" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="PrjPrtfloItmCapPlanGrpIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloItmCapPlnGrpIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.SAP__Message)" Nullable="false"/>
+                <NavigationProperty Name="_Item" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioItem_Type" Nullable="false" Partner="_CapacityPlan">
+                    <ReferentialConstraint Property="ProjectPortfolioItemUUID" ReferencedProperty="ProjectPortfolioItemUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PrjPrtfloBucketCapacityPlan_Type">
+                <Key>
+                    <PropertyRef Name="PrjPrtfloBcktCapPlanUUID"/>
+                    <PropertyRef Name="PrjPrtfloBcktCapPlnType"/>
+                    <PropertyRef Name="FiscalYear"/>
+                    <PropertyRef Name="FiscalPeriod"/>
+                    <PropertyRef Name="PrjPrtfloBcktCapPlnCatUUID"/>
+                </Key>
+                <Property Name="PrjPrtfloBcktCapPlanUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktCapPlnType" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="PrjPrtfloBcktCapPlnCatUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktCapPlnPeriodDate" Type="Edm.Date"/>
+                <Property Name="PrjPrtfloBcktCapPlnChgdDteTme" Type="Edm.DateTimeOffset"/>
+                <Property Name="PrjPrtfloBcktCapPlnAmount" Type="Edm.Decimal" Nullable="false" Precision="26" Scale="8"/>
+                <Property Name="PrjPrtfloBcktCapPlnUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="PrjPrtfloBcktCapPlnChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="PrjPrtfloBcktCapPlnCategoryId" Type="Edm.String" Nullable="false" MaxLength="15"/>
+                <Property Name="PrjPrtfloBcktCapPlnCatIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktCapPlnCatIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioBucketUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktCapPlnGroupId" Type="Edm.String" Nullable="false" MaxLength="24"/>
+                <Property Name="PrjPrtfloBcktCapPlnGrpSponsor" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="PrjPrtfloBcktCapPlnGrpIsActive" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="PrjPrtfloBcktCapPlnGrpIsOrigl" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ProjectPortfolioUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="SAP__Messages" Type="Collection(com.sap.gateway.srvd.api_projectportfolio.v0001.SAP__Message)" Nullable="false"/>
+                <NavigationProperty Name="_Bucket" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioBucket_Type" Nullable="false" Partner="_CapacityPlan">
+                    <ReferentialConstraint Property="ProjectPortfolioBucketUUID" ReferencedProperty="ProjectPortfolioBucketUUID"/>
+                </NavigationProperty>
+                <NavigationProperty Name="_Portfolio" Type="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type" Nullable="false">
+                    <ReferentialConstraint Property="ProjectPortfolioUUID" ReferencedProperty="ProjectPortfolioUUID"/>
+                </NavigationProperty>
+            </EntityType>
+            <ComplexType Name="SAP__Message">
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <Property Name="message" Type="Edm.String" Nullable="false"/>
+                <Property Name="target" Type="Edm.String"/>
+                <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false"/>
+                <Property Name="transition" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false"/>
+                <Property Name="longtextUrl" Type="Edm.String"/>
+            </ComplexType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="PrjPortfolioItemCapacityPlan" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPortfolioItemCapacityPlan_Type">
+                    <NavigationPropertyBinding Path="_Item" Target="ProjectPortfolioItem"/>
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                </EntitySet>
+                <EntitySet Name="PrjPrtfloBucketCapacityPlan" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPrtfloBucketCapacityPlan_Type">
+                    <NavigationPropertyBinding Path="_Bucket" Target="ProjectPortfolioBucket"/>
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                </EntitySet>
+                <EntitySet Name="PrjPrtfloBucketFinancialPlan" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPrtfloBucketFinancialPlan_Type">
+                    <NavigationPropertyBinding Path="_Bucket" Target="ProjectPortfolioBucket"/>
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                </EntitySet>
+                <EntitySet Name="PrjPrtfloItemFinancialPlan" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.PrjPrtfloItemFinancialPlan_Type">
+                    <NavigationPropertyBinding Path="_Item" Target="ProjectPortfolioItem"/>
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                </EntitySet>
+                <EntitySet Name="ProjectPortfolio" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolio_Type">
+                    <NavigationPropertyBinding Path="_Bucket" Target="ProjectPortfolioBucket"/>
+                </EntitySet>
+                <EntitySet Name="ProjectPortfolioBucket" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioBucket_Type">
+                    <NavigationPropertyBinding Path="_CapacityPlan" Target="PrjPrtfloBucketCapacityPlan"/>
+                    <NavigationPropertyBinding Path="_FinancialPlan" Target="PrjPrtfloBucketFinancialPlan"/>
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                    <NavigationPropertyBinding Path="_PortfolioItem" Target="ProjectPortfolioItem"/>
+                </EntitySet>
+                <EntitySet Name="ProjectPortfolioDecisionPoint" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioDecisionPoint_Type">
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                    <NavigationPropertyBinding Path="_PortfolioItem" Target="ProjectPortfolioItem"/>
+                </EntitySet>
+                <EntitySet Name="ProjectPortfolioItem" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjectPortfolioItem_Type">
+                    <NavigationPropertyBinding Path="_Bucket" Target="ProjectPortfolioBucket"/>
+                    <NavigationPropertyBinding Path="_CapacityPlan" Target="PrjPortfolioItemCapacityPlan"/>
+                    <NavigationPropertyBinding Path="_DecisionPoint" Target="ProjectPortfolioDecisionPoint"/>
+                    <NavigationPropertyBinding Path="_FinancialPlan" Target="PrjPrtfloItemFinancialPlan"/>
+                    <NavigationPropertyBinding Path="_ObjectLink" Target="ProjPortfolioItemObjectLink"/>
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                </EntitySet>
+                <EntitySet Name="ProjPortfolioItemObjectLink" EntityType="com.sap.gateway.srvd.api_projectportfolio.v0001.ProjPortfolioItemObjectLink_Type">
+                    <NavigationPropertyBinding Path="_Item" Target="ProjectPortfolioItem"/>
+                    <NavigationPropertyBinding Path="_Portfolio" Target="ProjectPortfolio"/>
+                </EntitySet>
+            </EntityContainer>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinancialPlanType">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Financial View Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/FiscalYear">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/FiscalPeriod">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Period"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnCategoryUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlanPeriodDate">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnChgdDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlanChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
+                <Annotation Term="SAP__common.Heading" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlanAmount">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="PrjPrtfloItmFinPlanCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Currency Amount"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlanCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="Currency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnCategoryId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Category"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnCatIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnCatIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/ProjectPortfolioItemUUID">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnGroupId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnGrpSponsor">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Sponsor"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnGrpIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloItmFinPlnGrpIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/PrjPrtfloItemFinancialPlan">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Item"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PrjPrtfloItmFinPlanAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type">
+                <Annotation Term="SAP__common.Label" String="Proj Portfolio Item Financial Planning"/>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/ObjectLinkType">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Object Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Portfolio Mgmt: Type of Linked Object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/CreatedByUser">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Creator"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Object creator"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/LastChangedByUser">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Creator"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Object creator"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/PrjPrtfloObjLinkLogicalSystem">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Logical system"/>
+                <Annotation Term="SAP__common.Heading" String="Log.System"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ProjPortfolioItemObjectLink">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Item"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PrjPrtfloObjLnkObjectKeyValue"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PrjPrtfloObjectLinkDescription"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>PrjPrtfloObjLnkObjectKeyValue</PropertyPath>
+                                <PropertyPath>PrjPrtfloObjectLinkDescription</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type">
+                <Annotation Term="SAP__common.Label" String="Project Portfolio Item Object Link"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItemDcsnPtChangedBy">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
+                <Annotation Term="SAP__common.Heading" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItmDcsnPointStatus">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ProjectPortfolioDecisionPoint">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_PortfolioItem"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type">
+                <Annotation Term="SAP__common.Label" String="Project Portfolio Decision Point"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnType">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Financial View Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/FiscalYear">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/FiscalPeriod">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Period"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlanUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnCatUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnPeriodDate">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnCategoryId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Category"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnCatIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnCatIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/ProjectPortfolioBucketUUID">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnGroupId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="ID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Object ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnGrpSponsor">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Sponsor"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnGrpIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnGrpIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnChgdDteTme">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
+                <Annotation Term="SAP__common.Heading" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnAmount">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="PrjPrtfloBcktFinPlnCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Currency Amount"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloBcktFinPlnCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="Currency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/PrjPrtfloBucketFinancialPlan">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Bucket"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PrjPrtfloBcktFinPlnAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type">
+                <Annotation Term="SAP__common.Label" String="Proj Portfolio Bucket Financial Planning"/>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjectPortfolioBucketUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBcktFinCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Currency"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBcktFinPlngPerdType">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fin Period Breakdown"/>
+                <Annotation Term="SAP__common.Heading" String="Financial Period Breakdown"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Financial Period Breakdown"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBucketCapacityUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/LastChangedByUser">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Changed By"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Changed by user"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBcktCapPlngPerdType">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Cap Period Breakdown"/>
+                <Annotation Term="SAP__common.Heading" String="Capacity Period Breakdown"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Capacity Period Breakdown"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/CreatedByUser">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Created by"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Person Who Created Object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/_CapacityPlan">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ProjectPortfolioBucket">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_CapacityPlan"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_FinancialPlan"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_PortfolioItem"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/_FinancialPlan">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/_PortfolioItem">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type">
+                <Annotation Term="SAP__common.Label" String="Project Portfolio Bucket"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemParentObjectUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemCategory">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Category"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemSubcategory">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Subcategory"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemStage">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Stage"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemGroup">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemTechnologyType">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="TechnologyType"/>
+                <Annotation Term="SAP__common.Heading" String="Technology Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Technology Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmAssessedRiskValue">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Assessed Risk"/>
+                <Annotation Term="SAP__common.Heading" String="Assessed Project Risk"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Assessed Project Risk"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmProbltyTechSuccss">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Prob.Tech.Succ."/>
+                <Annotation Term="SAP__common.Heading" String="Probability Technical Success"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Probability of Technical Success"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmProbltyCommSuccss">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Prob.Comm.Succ."/>
+                <Annotation Term="SAP__common.Heading" String="Probability Commercial Success"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Probability of Commercial Success"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemDevelopmentCost">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Developmnt Cost"/>
+                <Annotation Term="SAP__common.Heading" String="Development Cost"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Development Cost"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemLaunchCost">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Launch Cost"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmNPVAmount">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="NPV (manual)"/>
+                <Annotation Term="SAP__common.Heading" String="Net Present Value (manual)"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Net Present Value (manual)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemCurrency">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Currency"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Currency key"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemLocation">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Location"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Project Location"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemGeography">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Area"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Project Geography"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmFinPeriodType">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fin Period Breakdown"/>
+                <Annotation Term="SAP__common.Heading" String="Financial Period Breakdown"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Financial Period Breakdown"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemCapacityUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemType">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmExpdCommlValueAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="ECV (manual)"/>
+                <Annotation Term="SAP__common.Heading" String="Expected Commercial Value (manual)"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Expected Commercial Value (manual)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemPriorityGroup">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Priority"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Priority Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemChangedBy">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
+                <Annotation Term="SAP__common.Heading" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemClassification">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Item Classification"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemStatus">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmCapPlngPerdType">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Cap Period Breakdown"/>
+                <Annotation Term="SAP__common.Heading" String="Capacity Period Breakdown"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Capacity Period Breakdown"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmFcstdBdgtTotAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Forecast. Bdgt Total"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Budget Total"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Portfolio Item Forecasted Budget Total"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmFcstdBdgtAnnAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Forecst. Bdgt Annual"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Budget Annual"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Portfolio Item Forecasted Budget Annual"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmFcstdCostTotAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Forecast. Cost Total"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Cost Total"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Portfolio Item Forecasted Cost Total"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemYTDFcstdCost">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Forecasted Cost YTD"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Portfolio Item Forecasted Cost YTD"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemRiskPercent">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="RiskLimitUp"/>
+                <Annotation Term="SAP__common.Heading" String="Risk Upper Limit"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Risk Group - Upper Limit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemRiskGroup">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Risk Group Assessed"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemRiskIcon">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Project Risk"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemDerivedRisk">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Derived Risk"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemPriorityIcon">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Priority"/>
+                <Annotation Term="SAP__common.Heading" String="Project Priority"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemPhaseIcon">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Stage"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemBudgetIcon">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Budget Status"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Budget"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemScheduleIcon">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Schedule Status"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemStaffingIcon">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Staffing Status"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Staffing"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmBudgetTotalAmount">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Total Budget"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmBdgtAnnualAmount">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Annual Budget"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemPlannedCost">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Planned Cost"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Costs"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemYTDPlannedCost">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Planned Costs YTD"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Costs Year to Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemActualCost">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Actual Cost"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Costs"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmYTDActualCost">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Actual Cost YTD"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Cost Year to Day"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemStatusGroup">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Status Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmRetOnInvmtAmount">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="ROI in % (manual)"/>
+                <Annotation Term="SAP__common.Heading" String="Return on Investment in % (manual)"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Return on Investment in % (manual)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmIntRateOfRetAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="IRR in % (manual)"/>
+                <Annotation Term="SAP__common.Heading" String="Internal Rate of Return in % (manual)"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Internal Rate of Return in % (manual)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemDerivedRiskGroup">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Risk Group Derived"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemDerivedRiskIcon">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Derived Risk"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmFcstdDuration">
+                <Annotation Term="SAP__measures.Unit" Path="ProjPortfolioItemCapacityUnit"/>
+                <Annotation Term="SAP__common.Label" String="For. Duration"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Duration"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Forecasted Duration"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemPlannedDuration">
+                <Annotation Term="SAP__measures.Unit" Path="ProjPortfolioItemCapacityUnit"/>
+                <Annotation Term="SAP__common.Label" String="Planned Duration"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemActualDuration">
+                <Annotation Term="SAP__measures.Unit" Path="ProjPortfolioItemCapacityUnit"/>
+                <Annotation Term="SAP__common.Label" String="Actual Duration"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmStfngStatusGroup">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Staffing Group"/>
+                <Annotation Term="SAP__common.Heading" String="Staffing Status Group"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Staffing Status Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmBudgetStatusGroup">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Budget Status Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmSchedStatusGroup">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Schedule Group"/>
+                <Annotation Term="SAP__common.Heading" String="Schedule Status Group"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Schedule Status Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmPlndRevenueAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Planned Revenue"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Revenues"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmYTDPlannedRevenue">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Planned Revenue YTD"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Revenues Year to Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemActualRevenue">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Actual Revenue"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Revenues"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemYTDActualRevenue">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="Actual Revenue YTD"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Revenues Year to Day"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmNPVPlanAmount">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="NPV"/>
+                <Annotation Term="SAP__common.Heading" String="Net Present Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Net Present Value"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmIntRateRetPlanAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="IRR in %"/>
+                <Annotation Term="SAP__common.Heading" String="Internal Rate of Return in %"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Internal Rate of Return in %"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmRetOnInvmtPlanAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="ROI in %"/>
+                <Annotation Term="SAP__common.Heading" String="Return on Investment in %"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Return on Investment in %"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemPaybackPlanValue">
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Payback Periods"/>
+                <Annotation Term="SAP__common.Heading" String="Payback Periods in Months"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Payback Periods in Months"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/PrjPrtfloItmExpdCommlValPlnAmt">
+                <Annotation Term="SAP__measures.ISOCurrency" Path="ProjectPortfolioItemCurrency"/>
+                <Annotation Term="SAP__common.Label" String="ECV"/>
+                <Annotation Term="SAP__common.Heading" String="Expected Commercial Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Expected Commercial Value"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ProjectPortfolioItem">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Bucket"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_CapacityPlan"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_DecisionPoint"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_FinancialPlan"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_ObjectLink"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItemDevelopmentCost"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjectPortfolioItemLaunchCost"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmNPVAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmExpdCommlValueAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmFcstdBdgtTotAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmFcstdBdgtAnnAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmFcstdCostTotAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItemYTDFcstdCost"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmBudgetTotalAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmBdgtAnnualAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPortfolioItemPlannedCost"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItemYTDPlannedCost"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjectPortfolioItemActualCost"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmYTDActualCost"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmRetOnInvmtAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmIntRateOfRetAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmFcstdDuration"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItemPlannedDuration"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItemActualDuration"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmPlndRevenueAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmYTDPlannedRevenue"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPortfolioItemActualRevenue"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItemYTDActualRevenue"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmNPVPlanAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmIntRateRetPlanAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ProjPrtfloItmRetOnInvmtPlanAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PrjPrtfloItmExpdCommlValPlnAmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/_CapacityPlan">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/_DecisionPoint">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/_FinancialPlan">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/_ObjectLink">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type">
+                <Annotation Term="SAP__common.Label" String="Project Portfolio Item"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/LastChangedByUser">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Changed By"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Changed by user"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ProjectPortfolioType">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Portfolio Type"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Portfolio"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/PrjPrtfloIsClsfctnHierarchy">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Classification"/>
+                <Annotation Term="SAP__common.Heading" String="Classification Hierarchy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Classification Hierarchy"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ProjPrtfloHierarchyIsMandatory">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Mandatory"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/CreatedByUser">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Created by"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Name of Person Who Created Object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/_Bucket">
+                <Annotation Term="SAP__common.Composition"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ProjectPortfolio">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Bucket"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type">
+                <Annotation Term="SAP__common.Label" String="Project Portfolio"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapacityPlanUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapacityPlanType">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Capacity View Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/FiscalYear">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/FiscalPeriod">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Period"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnCategoryUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlanPeriodDate">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnChgdDateTime">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
+                <Annotation Term="SAP__common.Heading" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapacityPlanAmount">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__measures.Unit" Path="PrjPrtfloItmCapacityPlanUnit"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Amount"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapacityPlanUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnCategoryId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Category"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnCatIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnCatIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/ProjectPortfolioItemUUID">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnGroupId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnGrpSponsor">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Sponsor"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlanGrpIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/PrjPrtfloItmCapPlnGrpIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/PrjPortfolioItemCapacityPlan">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Item"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PrjPrtfloItmCapacityPlanAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPortfolioItemCapacityPlan_Type">
+                <Annotation Term="SAP__common.Label" String="Project Portfolio Item Capacity Planning"/>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlanUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnType">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Plan Type"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/FiscalYear">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Year"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/FiscalPeriod">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Label" String="Fiscal Period"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnCatUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnPeriodDate">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnChgdDteTme">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnAmount">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__measures.Unit" Path="PrjPrtfloBcktCapPlnUnit"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Amount"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnChangedBy">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Last Changed By"/>
+                <Annotation Term="SAP__common.Heading" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnCategoryId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Capacity Category"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnCatIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnCatIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/ProjectPortfolioBucketUUID">
+                <Annotation Term="SAP__core.Immutable"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnGroupId">
+                <Annotation Term="SAP__common.FieldControl" EnumMember="SAP__common.FieldControlType/Mandatory"/>
+                <Annotation Term="SAP__common.Label" String="ID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Object ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnGrpSponsor">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Sponsor"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnGrpIsActive">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/PrjPrtfloBcktCapPlnGrpIsOrigl">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Original flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/PrjPrtfloBucketCapacityPlan">
+                <Annotation Term="SAP__capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Bucket"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Portfolio"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PrjPrtfloBcktCapPlnAmount"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketCapacityPlan_Type">
+                <Annotation Term="SAP__common.Label" String="Proj Portfolio Bucket Capacity Planning"/>
+                <Annotation Term="SAP__common.Messages" Path="SAP__Messages"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloItemFinancialPlan_Type/PrjPrtfloFinPlnPeriodIsInitial">
+                <Annotation Term="SAP__common.Label" String="TRUE"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/ProjectPortfolioObjectLinkUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/ProjectPortfolioObjectUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/PrjPrtfloObjLnkObjectKeyValue">
+                <Annotation Term="SAP__common.Label" String="Key"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Key of the linked object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/PrjPrtfloObjectLinkDescription">
+                <Annotation Term="SAP__common.Label" String="Description"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Description of the linked object"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/CreatedOnDateTime">
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/LastChangeDateTime">
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/ProjectPortfolioItemUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjPortfolioItemObjectLink_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItmDcsnPointUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItemDecisionPoint">
+                <Annotation Term="SAP__common.Label" String="ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjectPortfolioItemUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/LastChangeDateTime">
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItmDcsnPtPlndStrtDte">
+                <Annotation Term="SAP__common.Label" String="Planned Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/PrtfloItmDcsnPtPlndFinishDate">
+                <Annotation Term="SAP__common.Label" String="Planned Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItmDcsnPtActlStrtDte">
+                <Annotation Term="SAP__common.Label" String="Actual Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/PrtfloItmDcsnPtActlFinishDate">
+                <Annotation Term="SAP__common.Label" String="Actual Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItmDcsnPointIsActive">
+                <Annotation Term="SAP__common.Label" String="Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/PrjPrtfloItmDcsnPtFcstdStrtDte">
+                <Annotation Term="SAP__common.Label" String="Forecastd Start"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Forecasted Start"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/PrtfloItmDcsnPtFcstdFinishDate">
+                <Annotation Term="SAP__common.Label" String="Forecast Finish"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Forecasted Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/PrtfloItmDcsnPointDecisionDate">
+                <Annotation Term="SAP__common.Label" String="Forecaste DecisionDt"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Decision Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Forecasted Decision Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItmDcsnPtPlndDcsnDte">
+                <Annotation Term="SAP__common.Label" String="Planned DecisionDate"/>
+                <Annotation Term="SAP__common.Heading" String="Planned Decision Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Decision date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjPrtfloItmDcsnPtActlDcsnDte">
+                <Annotation Term="SAP__common.Label" String="Actual Decision Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioDecisionPoint_Type/ProjectPortfolioUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.PrjPrtfloBucketFinancialPlan_Type/PrjPrtfloFinPlnPeriodIsInitial">
+                <Annotation Term="SAP__common.Label" String="TRUE"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPortfolioBucketExternalID">
+                <Annotation Term="SAP__common.Label" String="ID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Object ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ParentObjectUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/LastChangeDateTime">
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBucketReleaseStatus">
+                <Annotation Term="SAP__common.Label" String="Status"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Release Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBcktCapPlngStartDate">
+                <Annotation Term="SAP__common.Label" String="Capacity Start"/>
+                <Annotation Term="SAP__common.Heading" String="Capacity Planning Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Capacity Planning Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/PrjPrtfloBcktCapPlngFinishDate">
+                <Annotation Term="SAP__common.Label" String="Capacity Finish"/>
+                <Annotation Term="SAP__common.Heading" String="Capacity Planning Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Capacity Planning Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBcktFinPlngStartDate">
+                <Annotation Term="SAP__common.Label" String="Financial Start"/>
+                <Annotation Term="SAP__common.Heading" String="Financial Planning Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Financial Planning Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/PrjPrtfloBcktFinPlngFinishDate">
+                <Annotation Term="SAP__common.Label" String="Financial Finish"/>
+                <Annotation Term="SAP__common.Heading" String="Financial Planning Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Financial Planning Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBcktTransfStartDate">
+                <Annotation Term="SAP__common.Label" String="Transfer Start Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Start Date for Transfer to SAP ERP"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBcktTransfFinishDate">
+                <Annotation Term="SAP__common.Label" String="Transfer Finish Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Finish Date for Transfer to SAP ERP"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioBucket_Type/ProjPrtfloBucketCreatedOnDate">
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Date When the Object Was Created"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItem">
+                <Annotation Term="SAP__common.Label" String="ID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Object ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemHeadcountValue">
+                <Annotation Term="SAP__common.Label" String="Actual Headcount"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/LastChangeDateTime">
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmFcstdStartDate">
+                <Annotation Term="SAP__common.Label" String="Forecastd Start"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Forecasted Start"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmPlannedStartDate">
+                <Annotation Term="SAP__common.Label" String="Planned Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemActualStartDate">
+                <Annotation Term="SAP__common.Label" String="Actual Start"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmFcstdFinishDate">
+                <Annotation Term="SAP__common.Label" String="Forecast Finish"/>
+                <Annotation Term="SAP__common.Heading" String="Forecasted Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Forecasted Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmPlannedFinishDate">
+                <Annotation Term="SAP__common.Label" String="Planned Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemActualFinishDate">
+                <Annotation Term="SAP__common.Label" String="Actual Finish"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Actual Finish Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemIsEscalated">
+                <Annotation Term="SAP__common.Label" String="Escalation"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Escalation Flag"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemHeaderUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemDiscountRate">
+                <Annotation Term="SAP__common.Label" String="Discount Rate"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloDcsnPointActiveUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPortfolioItemTemplateUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemActualHeadNmbrOf">
+                <Annotation Term="SAP__common.Label" String="Actual Headcount"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemIsProposal">
+                <Annotation Term="SAP__common.Label" String="Proposal"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemWorkEffortTotal">
+                <Annotation Term="SAP__common.Label" String="Actual Effort"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItmYTDWorkEffort">
+                <Annotation Term="SAP__common.Label" String="Work Effort YTD"/>
+                <Annotation Term="SAP__common.Heading" String="Work Effort Year-to-Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Work Effort Year-to-Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjectPortfolioItemWorkEffort">
+                <Annotation Term="SAP__common.Label" String="Planned Effort"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolioItem_Type/ProjPrtfloItemYTDPlannedEffort">
+                <Annotation Term="SAP__common.Label" String="Planned Effort YTD"/>
+                <Annotation Term="SAP__common.Heading" String="Planned Effort Year-to-Date"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Planned Effort Year-to-Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ProjectPortfolioExternalID">
+                <Annotation Term="SAP__common.Label" String="ID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Business Object ID"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ParentObjectUUID">
+                <Annotation Term="SAP__common.Label" String="GUID"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Guid for application objects"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/LastChangeDateTime">
+                <Annotation Term="SAP__common.Label" String="Time Stamp"/>
+                <Annotation Term="SAP__common.QuickInfo" String="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ProjectPortfolioReleaseStatus">
+                <Annotation Term="SAP__common.Label" String="Status"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Release Status"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ProjectPortfolioMasterLanguage">
+                <Annotation Term="SAP__common.Label" String="Text Language"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ProjectPortfolio_Type/ProjectPortfolioCreatedOnDate">
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Date When the Object Was Created"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

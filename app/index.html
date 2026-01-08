@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> Project Preview </title>
+    <script src="https://ui5.sap.com/1.136.9/resources/sap-ui-core.js" 
+            id="sap-ui-bootstrap"
+            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-bindingSyntax="complex" 
+            data-sap-ui-xx-bindingSyntax="complex"
+            data-sap-ui-resourceroots='{"assets": "assets"}' 
+            data-sap-ui-libs="sap.m,sap.uxap,sap.ui.layout,sap.f">
+    </script>
+    <link rel="stylesheet" href="assets/preview.css">
+</head>
+
+<body id="body" class="sapUiBody">
+    <script>
+        "use strict";
+        sap.ui.localResources("assets");
+        (function (jQuery, App, Page) {
+            sap.ui.getCore().attachInit(function () {
+                sap.ui.define([
+                    "sap/ui/core/mvc/Controller",
+                    "sap/ui/model/json/JSONModel"
+                ], function (Controller, JSONModel) {
+                    return Controller.extend("PreviewController", {
+                        onInit: function () {
+
+                            const data = {"Services":[{"ServiceName":"AdminService","DetailsURL":"./odata/v4/adminservice/","Metadata":"./odata/v4/adminservice/$metadata","Entities":[{"Name":"RequestType","URL":"./odata/v4/adminservice/RequestType","FioriURL":"$fiori-preview/AdminService/RequestType#preview-app"},{"Name":"BusinessArea","URL":"./odata/v4/adminservice/BusinessArea","FioriURL":"$fiori-preview/AdminService/BusinessArea#preview-app"},{"Name":"InvestmentType","URL":"./odata/v4/adminservice/InvestmentType","FioriURL":"$fiori-preview/AdminService/InvestmentType#preview-app"},{"Name":"ReqStatus","URL":"./odata/v4/adminservice/ReqStatus","FioriURL":"$fiori-preview/AdminService/ReqStatus#preview-app"},{"Name":"Approvers","URL":"./odata/v4/adminservice/Approvers","FioriURL":"$fiori-preview/AdminService/Approvers#preview-app"}],"EntitiesCount":5},{"ServiceName":"CapexApproval","DetailsURL":"./odata/v4/capexapprovalservice/","Metadata":"./odata/v4/capexapprovalservice/$metadata","Entities":[{"Name":"CapexApproval","URL":"./odata/v4/capexapprovalservice/CapexApproval","FioriURL":"$fiori-preview/CapexApproval/CapexApproval#preview-app"},{"Name":"CapexRequest","URL":"./odata/v4/capexapprovalservice/CapexRequest","FioriURL":"$fiori-preview/CapexApproval/CapexRequest#preview-app"}],"EntitiesCount":2},{"ServiceName":"CapexService","DetailsURL":"./odata/v4/capexservice/","Metadata":"./odata/v4/capexservice/$metadata","Entities":[{"Name":"CapexRequest","URL":"./odata/v4/capexservice/CapexRequest","FioriURL":"$fiori-preview/CapexService/CapexRequest#preview-app"},{"Name":"CapexApproval","URL":"./odata/v4/capexservice/CapexApproval","FioriURL":"$fiori-preview/CapexService/CapexApproval#preview-app"},{"Name":"PortfolioBucket","URL":"./odata/v4/capexservice/PortfolioBucket","FioriURL":"$fiori-preview/CapexService/PortfolioBucket#preview-app"},{"Name":"Portfolio","URL":"./odata/v4/capexservice/Portfolio","FioriURL":"$fiori-preview/CapexService/Portfolio#preview-app"},{"Name":"RequestType","URL":"./odata/v4/capexservice/RequestType","FioriURL":"$fiori-preview/CapexService/RequestType#preview-app"},{"Name":"BusinessArea","URL":"./odata/v4/capexservice/BusinessArea","FioriURL":"$fiori-preview/CapexService/BusinessArea#preview-app"},{"Name":"InvestmentType","URL":"./odata/v4/capexservice/InvestmentType","FioriURL":"$fiori-preview/CapexService/InvestmentType#preview-app"},{"Name":"ReqStatus","URL":"./odata/v4/capexservice/ReqStatus","FioriURL":"$fiori-preview/CapexService/ReqStatus#preview-app"}],"EntitiesCount":8},{"ServiceName":"S4Service","DetailsURL":"./S4Service/","Metadata":"./S4Service/$metadata","Entities":[{"Name":"ProjectPortfolio","URL":"./S4Service/ProjectPortfolio","FioriURL":"$fiori-preview/S4Service/ProjectPortfolio#preview-app"},{"Name":"ProjectPortfolioBucket","URL":"./S4Service/ProjectPortfolioBucket","FioriURL":"$fiori-preview/S4Service/ProjectPortfolioBucket#preview-app"},{"Name":"ProjectPortfolioItem","URL":"./S4Service/ProjectPortfolioItem","FioriURL":"$fiori-preview/S4Service/ProjectPortfolioItem#preview-app"}],"EntitiesCount":3}]}
+                            this.getView().setModel(new JSONModel(data));
+                        }
+                    });
+                });
+                var oApp = new App()
+                var previewView = sap.ui.view({
+                    viewName: "assets.Preview",
+                    type: sap.ui.core.mvc.ViewType.XML
+                });
+                oApp.addPage(new Page({
+                    content: [previewView],
+                    showHeader: false
+                })).placeAt("content");
+            });
+
+        }(jQuery, sap.m.App, sap.m.Page));
+    </script>
+    <div id="content"></div>
+</body>
+
+</html>
