@@ -99,7 +99,7 @@ entity RegionCodes : domaintable {
 
 entity SubregionCodes : domaintable {
   parent : Association to RegionCodes;
-};
+}; 
 
 entity CapexUsers : userdomain {
 manager_ID : String(100);
