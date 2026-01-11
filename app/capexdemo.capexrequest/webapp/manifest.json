@@ -31,6 +31,13 @@
           "semanticObject": "capexdemocapexrequest",
           "action": "display",
           "title": "{{capexdemocapexrequest-display.flpTitle}}",
+          "subTitle": "{{capexdemocapexrequest-display.flpSubtitle}}",
+          "icon": "sap-icon://open-folder",
+          "indicatorDataSource": {
+            "dataSource": "mainService",
+            "path": "CapexRequest/$count",
+            "refresh": 1800
+          },
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -41,12 +48,6 @@
           "action": "open",
           "title": "{{capexrequest-open.flpTitle}}",
           "subTitle": "{{capexrequest-open.flpSubtitle}}",
-          "icon":"sap-icon://open-folder",
-          "indicatorDataSource":{
-            "dataSource": "mainService",
-            "path": "CapexRequest",
-            "refresh": 1800
-          },
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -74,11 +75,12 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.120.13", 
+      "minUI5Version": "1.120.13",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -110,22 +112,29 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "OneColumn",
+          "defaultThreeColumnLayoutType": "OneColumn",
+          "initialColumnsCount": 1
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "CapexRequestList",
-          "target": "CapexRequestList"
+          "target": [
+            "CapexRequestList"
+          ]
         },
         {
           "pattern": "CapexRequest({key}):?query:",
           "name": "CapexRequestObjectPage",
-          "target": "CapexRequestObjectPage"
-        },
-        {
-          "pattern": "CapexRequest({key})/approvals({key2}):?query:",
-          "name": "CapexApprovalObjectPage",
-          "target": "CapexApprovalObjectPage"
+          "target": [
+            "CapexRequestList",
+            "CapexRequestObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -136,7 +145,7 @@
           "options": {
             "settings": {
               "contextPath": "/CapexRequest",
-              	"initialLoad": "Enabled",
+              "initialLoad": "Enabled",
               "variantManagement": "Page",
               "navigation": {
                 "CapexRequest": {
@@ -148,13 +157,14 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                  
                     "type": "ResponsiveTable"
                   }
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "CapexRequestObjectPage": {
           "type": "Component",
@@ -164,35 +174,32 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/CapexRequest",
-              "navigation": {
-                "approvals": {
-                  "detail": {
-                    "route": "CapexApprovalObjectPage"
+              "navigation": {},
+              "controlConfiguration": {
+                "approvals/@com.sap.vocabularies.UI.v1.LineItem#i18nRequestHistory": {
+                  "tableSettings": {
+                    "enableFullScreen": true
                   }
                 }
               }
             }
-          }
-        },
-        "CapexApprovalObjectPage": {
-          "type": "Component",
-          "id": "CapexApprovalObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/CapexRequest/approvals"
-            }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/CapexRequest({key})"
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {
     "registrationIds": [],
     "archeType": "transactional"
   },
-  
   "sap.cloud": {
     "public": true,
     "service": "capexdemo.service"

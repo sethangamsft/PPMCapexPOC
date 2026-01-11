@@ -12,5 +12,7 @@
         "*.rule": "default",
         "*.properties": "default",
         "*.fragment": "default"
-    }
+    },
+    "SAP HANA SQLScript LSP.URL": "",
+    "SAP HANA SQLScript LSP.XsAdvancedHrttServiceUrl": ""
 }

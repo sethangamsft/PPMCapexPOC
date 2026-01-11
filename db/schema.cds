@@ -5,14 +5,15 @@ using {
   managed,
   cuid,
   Currency,
-  Country
+  Country 
 } from '@sap/cds/common';
 using {domaintable, remotedomain, userdomain, capexExtensions} from './extensions';
 
 
 entity CapexRequest : managed {
   key     ID                           : UUID @Core.Computed;
-          requestor               : Association to  CapexUsers;
+          requestor_ID               : String(100);
+          requestor : Association to CapexUsers on requestor.userID = $self.requestor_ID;
           requestorName : String(100);
           requestType                  : Association to RequestType default '0NEW';
           requestTitle                 : String(255) default 'New CAPEX Request';
@@ -27,12 +28,13 @@ entity CapexRequest : managed {
           requestDescription           : String(1024);
           businessArea                 : Association to BusinessArea;
           investmentType               : Association to InvestmentType;
-          country                      : Country;
+          country                      :  Country;
           region                       : Association to RegionCodes;
           subregion                    : Association to SubregionCodes;
           portfolioItem                : Association to PortfolioItem;
           inputDueDate                 : Date;
-          collaborator                 : Association to CapexUsers;
+          collaborator_ID              : String(100);
+          collaborator                 :  Association to CapexUsers on collaborator.userID = $self.collaborator_ID;
           requestedAmount              : Decimal(15, 2);
           forecastedAmount             : Decimal(15, 2);
           currency                     : Currency;
@@ -52,51 +54,56 @@ entity CapexRequest : managed {
 entity CapexApproval : managed {
   key ID              : UUID @Core.Computed;
       capex_RequestID : UUID;
-      approver        : String(100);
+      approver        : Association to CapexUsers;
+      role : Association to Role;
       approvalStatus  : Association to ReqStatus;
       approvalDate    : Date;
       comments        : String(1024);
-}
+};
 
 entity BusinessArea : domaintable {
 
-}
+};
 
 entity CapexExtensionsFields: capexExtensions{
 
-}
+};
 
-entity RequestType : domaintable {}
+entity RequestType : domaintable {};
 
 
-entity InvestmentType : domaintable {}
+entity InvestmentType : domaintable {};
 
 entity Approvers : cuid, managed {
   lob   : Association to Portfolio;
   alias : Association to CapexUsers;
-  role  : String(100);
+  role  : Association to Role;
   level : Integer;
-}
+};
 
 entity Portfolio : remotedomain {
   portfolio : Association to Portfolio;
-  parent    : Association to PortfolioItem;
-}
+  // parent    : Association to PortfolioItem;
+};
 
+entity Role : domaintable{
+
+}
 entity PortfolioItem : remotedomain {
-
-}
+  parent : Association to PortfolioBucket;
+};
 
 entity RegionCodes : domaintable {
-  parent : Country;
-}
+ 
+};
 
 entity SubregionCodes : domaintable {
   parent : Association to RegionCodes;
-}
+};
 
-entity CapexUsers: userdomain{
-
+entity CapexUsers : userdomain {
+manager_ID : String(100);
+manager : Association to  CapexUsers on manager.userID = $self.manager_ID;
 }
 
 entity PortfolioBucket : remotedomain {

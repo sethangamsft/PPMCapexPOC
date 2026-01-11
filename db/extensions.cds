@@ -1,18 +1,15 @@
- using {
-  managed
  
-} from '@sap/cds/common';
 
-aspect domaintable : managed {
+aspect domaintable {
   key code        : String(100);
       description : String(255);
 
 };
 
-aspect userdomain : managed {
-key ID : String(100);
-Name : String(100);
-managerID : String(100);
+aspect userdomain {
+  key ID     : UUID @Core.Computed;
+      userID : String(100);
+      Name   : String(100);
 
 }
 
@@ -24,5 +21,5 @@ aspect remotedomain {
 }
 
 aspect capexExtensions {
-    requestDate: Date;
+  requestDate : Date;
 }

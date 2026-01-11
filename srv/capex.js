@@ -3,23 +3,6 @@ import cds from '@sap/cds';
 const { SELECT, INSERT, UPDATE, DELETE } = cds.ql;
 
 /**
- * ---------------------------------------------------------------------
- * S4 SERVICE
- * ---------------------------------------------------------------------
- */
-export class S4Service extends cds.ApplicationService {
-
-  async init() {
-
-    const remote = await cds.connect.to('API_PROJECTPORTFOLIO');
-
-    this.on('READ', 'ProjectPortifolio', req => remote.run(req.query));
-    this.on('READ', 'ProjectPortfolioItem', req => remote.run(req.query));
-    this.on('READ', 'ProjectPortfolioBucket', req => remote.run(req.query));
-
-    return super.init();
-  }
-}
 
 /**
  * ---------------------------------------------------------------------
@@ -32,28 +15,40 @@ export class CapexService extends cds.ApplicationService {
 
     this.S4 = await cds.connect.to('API_PROJECTPORTFOLIO');
 
-    const { CapexRequest } = this.entities;
-
-    // Enable submit button
+   
     this.after('READ', 'CapexRequest', each => {
       if (each.requestStatus_code)
         each.enableSubmit = each.requestStatus_code === '0001';
     });
 
     // Info message after save
-    this.after([ 'CREATE', 'UPDATE'], 'CapexRequest', async(data, req) => {
+    this.after(['CREATE', 'UPDATE'], 'CapexRequest', async (data, req) => {
       const { ID } = req.data;
-      await this.submitforapproval({ params: { ID} });
+      await this.submitforapproval({ params: { ID } });
       req.info(200, `CAPEX Request ${data.ID} saved successfully and submitted for approval`);
     });
 
+    
+   
+this.before('NEW', 'CapexRequest.drafts', async(req) => { 
+  req.data.requestor_ID = req.user.id;
+});
 
-    this.before(['UPDATE'], 'CapexRequest', (req) => {
-      const { requestStatus_code } = req.data;
+  this.before(['UPDATE', 'CREATE'], 'CapexRequest', async (req) => {
+      const { requestStatus_code, requestor_ID } = req.data;
+      if (requestor_ID) {
+        const user = await SELECT.one.from('microsoft.capex.CapexUsers')
+          .columns('Name')
+          .where({ ID: requestor_ID });
+
+        if (user) {
+          req.data.requestorName = user.Name;
+        }
+      }
 
       if (!['0001'].includes(requestStatus_code)) {
         req.error(400, 'Cannot update CapexRequest with the current status.');
-      }  
+      }
     });
 
 
@@ -64,13 +59,7 @@ export class CapexService extends cds.ApplicationService {
       return { requestStatus: 'Submitted' };
     });
 
-    // this.on('approveRequest', async req => {
-    //   const { ID } = req.data;
-    //   const result = await this.statusupdate(ID, '0003');
-    //   if (result.isSucess) {
-    //     return { message: `Capex ${ID} approved successfully` };
-    //   }
-    // });
+
 
     // S4 Reads
     this.on('READ', 'PortfolioBucket', req => this.GetS4PortfolioBucket(req));
@@ -91,8 +80,8 @@ export class CapexService extends cds.ApplicationService {
       if (!capex || capex.length === 0) {
         throw new Error(`Capex record ${ID} not found`);
       }
-
-      await UPDATE('CapexRequest')
+      const { CapexRequest } = this.entities;
+      await UPDATE(CapexRequest)
         .set({ requestStatus_code: status })
         .where({ ID });
 

@@ -31,7 +31,9 @@
     "watch-capexdemo.capexrequest": "cds watch --open capexdemo.capexrequest/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy capexdemo --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-capexdemo.approvers": "cds watch --open capexdemo.approvers/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-capexdemo.capexusers": "cds watch --open capexdemo.capexusers/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "private": true,
   "cds": {
@@ -62,6 +64,10 @@
   },
   "lcap": true,
   "sapux": [
-    "app/capexdemo.capexrequest"
+    "app/capexdemo.capexrequest",
+    "app/capexdemo.approvers",
+    "app/capexdemo.capexusers",
+    "app/capexdemo.approvers",
+    "app/capexdemo.approvers"
   ]
 }

@@ -1,0 +1,198 @@
+{
+	"_version": "1.60.0",
+	"sap.app": {
+		"id": "capexdemo.capexusers",
+		"type": "application",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				""
+			]
+		},
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "@sap/generator-fiori:lrop",
+			"version": "1.20.0",
+			"toolsId": "98a9c908-dc65-4c7a-97ef-b064ed0f52a1"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/adminservice/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"odataVersion": "4.0"
+				}
+			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"capexdemocapexusers-display": {
+					"semanticObject": "capexdemocapexusers",
+					"action": "display",
+					"icon": "sap-icon://user-edit",
+					"shortTitle": "{{capexdemocapexusers-display.flpTitle}}",
+					"subTitle": "{{capexdemocapexusers-display.flpSubtitle}}",
+					"indicatorDataSource": {
+						"dataSource": "mainService",
+						"path": "CapexUsers/$count",
+						"refresh": 1800
+					},
+					"title": "{{capexdemocapexusers-display.flpTitle}}",
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					}
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": true,
+		"dependencies": {
+			"minUI5Version": "1.120.13",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.fe.templates": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "capexdemo.capexusers.i18n.i18n",
+					"supportedLocales": [
+						""
+					]
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties",
+				"settings": {
+					"supportedLocales": [
+						""
+					]
+				}
+			}
+		},
+		"resources": {
+			"css": []
+		},
+		"routing": {
+			"config": {
+				"flexibleColumnLayout": {
+					"defaultTwoColumnLayoutType": "OneColumn",
+					"defaultThreeColumnLayoutType": "OneColumn",
+					"initialColumnsCount": 1
+				},
+				"routerClass": "sap.f.routing.Router"
+			},
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "CapexUsersList",
+					"target": "CapexUsersList"
+				},
+				{
+					"pattern": "CapexUsers({key}):?query:",
+					"name": "CapexUsersObjectPage",
+					"target": "CapexUsersObjectPage"
+				}
+			],
+			"targets": {
+				"CapexUsersList": {
+					"type": "Component",
+					"id": "CapexUsersList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/CapexUsers",
+							"variantManagement": "Page",
+							"navigation": {
+								"CapexUsers": {
+									"detail": {
+										"route": "CapexUsersObjectPage"
+									}
+								}
+							},
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable"
+									}
+								}
+							},
+							"initialLoad": "Enabled"
+						}
+					},
+					"controlAggregation": "beginColumnPages",
+					"contextPattern": ""
+				},
+				"CapexUsersObjectPage": {
+					"type": "Component",
+					"id": "CapexUsersObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": false,
+							"contextPath": "/CapexUsers"
+						}
+					},
+					"controlAggregation": "midColumnPages",
+					"contextPattern": "/CapexUsers({key})"
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "sap.fe.templates.RootContainer.view.Fcl",
+			"type": "XML",
+			"async": true,
+			"id": "appRootView"
+		},
+		"flexBundle": false
+	},
+	"sap.fiori": {
+		"registrationIds": [],
+		"archeType": "transactional"
+	},
+	"sap.cloud": {
+		"public": true,
+		"service": "capexdemo.service"
+	}
+}

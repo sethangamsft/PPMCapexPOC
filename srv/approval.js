@@ -7,13 +7,26 @@ export class CapexApproval extends cds.ApplicationService {
 
   async init() {
 
-    this.on('approve', async req => this.processApproval(req, '0005'));
-    this.on('reject', async req => this.processApproval(req, '0006'));
+    this.on('approveRequest', async req => this.processApproval(req,  '0005'));
+    this.on('rejectRequest', async req => this.processApproval(req, '0006'));
+    this.on('getManager',  async req => this.getManager(req));
+    
+    this.on('getApprovers', async req => this.getApprovers(req));
     return super.init();
-  }
+  };
+
+  async getManger(req){
+    const {ID} = req.data;
+    return await this.read('Users').where({code: ID})
+  };
+
+   async getApprovers(req){
+    const {ID} = req.data;
+    return await this.read('Approvers').where({lob_code : ID})
+   };
 
   async processApproval(req, StatusCode) {
-    const { ID, Comments } = req.data;
+    const { ID, role_code, Comments } = req.data;
     // 1. Read existing record
     const capexRequest = await SELECT.one.from('CapexRequest').where({ ID });
 
@@ -21,6 +34,10 @@ export class CapexApproval extends cds.ApplicationService {
       return req.error(404, `Capex Request ${ID} not found`);
     }
 
+    const user =  await SELECT.one.from('Users').where({userID : req.user.id})
+    if (!user){
+      return req.error(400, `You are no longer Valid Approver ,Please contact Adminstrator to maintain your users`)
+    }
     // 2. Update fields
     await UPDATE('CapexRequest')
       .set({
@@ -33,7 +50,7 @@ export class CapexApproval extends cds.ApplicationService {
 
     await INSERT.into('CapexApproval').entries({
       capex_RequestID: ID,
-      approver: req.user.id,
+      approver_ID: req.user.id,
       approvalStatus_code: StatusCode,
       approvalDate: new Date().toISOString(), // store ISO string
       comments: Comments

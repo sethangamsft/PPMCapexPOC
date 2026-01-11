@@ -2,242 +2,273 @@ _schema-version: 3.3.0
 ID: capexdemo
 description: A simple CAP project.
 version: 1.0.0
+modules:
+#####################################################################################
+- name: capexdemo-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: capexdemo-auth
+  - name: capexdemo-db
+  - name: capexdemo-destination-service
+  - name: capexdemo-connectivity
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    instances: 1
+  build-parameters:
+    builder: npm-ci
+    ignore:
+    - node_modules/
+    - .npmrc
+    - .cache/
+    - .DS_Store
+    - test/
+
+#####################################################################################
+- name: capexdemo-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: capexdemo-db
+  parameters:
+    buildpack: nodejs_buildpack
+
+#####################################################################################
+- name: capexdemo-app-deployer
+  type: com.sap.application.content
+  path: gen
+  requires:
+  - name: capexdemo-auth
+  - name: srv-api
+  - name: capexdemo-html5-repo-host
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+      content-target: true
+  build-parameters:
+    build-result: resources/
+    ignore:
+    - node_modules/
+    - .npmrc
+    - .cache/
+    - .DS_Store
+    - test/
+    requires:
+    - artifacts:
+      - capexdemocapexrequest.zip
+      name: capexdemocapexdemocapexrequest
+      target-path: resources/
+    - artifacts:
+      - capexdemoapprovers.zip
+      name: capexdemocapexdemocapexapprovers
+      target-path: resources/
+    - artifacts:
+      - capexdemocapexusers.zip
+      name: capexdemocapexdemocapexusers
+      target-path: resources/
+- name: capexdemocapexdemocapexrequest
+  type: html5
+  path: app/capexdemo.capexrequest
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    ignore:
+    - node_modules/
+    - .npmrc
+    - .cache/
+    - .DS_Store
+    - test/
+    supported-platforms: []
+
+#####################################################################################
+- name: capexdemocapexdemocapexapprovers
+  type: html5
+  path: app/capexdemo.approvers
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    ignore:
+    - node_modules/
+    - .npmrc
+    - .cache/
+    - .DS_Store
+    - test/
+    supported-platforms: []
+
+#####################################################################################
+- name: capexdemocapexdemocapexusers
+  type: html5
+  path: app/capexdemo.capexusers
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    ignore:
+    - node_modules/
+    - .npmrc
+    - .cache/
+    - .DS_Store
+    - test/
+    supported-platforms: []
+
+#####################################################################################
+- name: capexdemo-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: capexdemo-auth
+    parameters:
+      service-key:
+        name: capexdemo-auth-key
+  - name: capexdemo-html5-repo-host
+    parameters:
+      service-key:
+        name: capexdemo-html5-repo-host-key
+  - name: srv-api
+  - name: capexdemo-destination-service
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: capexdemo_html5_repository
+          ServiceInstanceName: capexdemo-html5-repo-host
+          ServiceKeyName: capexdemo-html5-repo-host-key
+          sap.cloud.service: capexdemo.service
+        - Authentication: OAuth2UserTokenExchange
+          Name: capexdemo-auth
+          ServiceInstanceName: capexdemo-auth
+          ServiceKeyName: capexdemo-auth-key
+          sap.cloud.service: capexdemo.service
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+
+#####################################################################################
+- name: capexdemo
+  type: approuter.nodejs
+  path: app/router
+  requires:
+  - name: srv-api
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: srv-api
+      url: ~{srv-url}
+  - name: capexdemo-auth
+  - name: capexdemo-html5-runtime
+  - name: capexdemo-destination-service
+    group: destinations
+    properties:
+      forwardAuthToken: false
+      name: ui5
+      url: https://ui5.sap.com
+  provides:
+  - name: app-api
+    properties:
+      app-protocol: ${protocol}
+      app-uri: ${default-uri}
+  parameters:
+    disk-quota: 512M
+    keep-existing-routes: true
+    memory: 512M
+
+#####################################################################################
+resources:
+#####################################################################################
+- name: capexdemo-auth
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      oauth2-configuration:
+        credential-types:
+        - binding-secret
+        - x509
+        redirect-uris:
+        - https://*~{app-api/app-uri}/**
+      role-collections:
+      - description: generated
+        name: admin (capexdemo - admin)
+        role-template-references:
+        - $XSAPPNAME.admin
+      tenant-mode: dedicated
+      xsappname: capexdemo-dev
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+  requires:
+  - name: app-api
+
+#####################################################################################
+- name: capexdemo-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+
+#####################################################################################
+- name: capexdemo-html5-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+
+#####################################################################################
+- name: capexdemo-html5-runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+
+#####################################################################################
+- name: capexdemo-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          existing_destinations_policy: update
+    service: destination
+    service-plan: lite
+  requires:
+  - name: srv-api
+- name: capexdemo-connectivity
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity
+    service-plan: lite
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-    - builder: custom
-      commands:
-        - npm ci
-        - npx cds build --production
-modules:
-  ###########################################################################
-  # 1) CAP Backend (srv)
-  ###########################################################################
-  - name: capexdemo-srv
-    type: nodejs
-    path: gen/srv
-    requires:
-      - name: capexdemo-auth
-      - name: capexdemo-db
-      - name: capexdemo-destination-service
-      - name: capexdemo-connectivity
-    provides:
-      - name: srv-api
-        properties:
-          srv-url: ${default-url}
-    parameters:
-      buildpack: nodejs_buildpack
-      instances: 1
-    build-parameters:
-      builder: npm-ci
-      ignore:
-        - node_modules/
-        - .npmrc
-        - .cache/
-        - .DS_Store
-        - test/
-  ###########################################################################
-  # 2) DB Deployer
-  ###########################################################################
-  - name: capexdemo-db-deployer
-    type: hdb
-    path: gen/db
-    requires:
-      - name: capexdemo-db
-    parameters:
-      buildpack: nodejs_buildpack
-    ###########################################################################
-    # 2)  HTML5 Apps Deployer (for Managed Router)
-    ###########################################################################  
-  - name: capexdemo-app-deployer
-    type: com.sap.application.content
-    path: gen
-    requires:
-      - name: capexdemo-auth
-      - name: srv-api
-      - name: capexdemo-html5-repo-host
-        parameters:
-          config:
-            HTML5Runtime_enabled: true
-          content-target: true
-    build-parameters:
-      build-result: resources/
-      requires:
-        - name: capexdemocapexdemocapexrequest
-          artifacts:
-            - capexdemocapexrequest.zip
-          target-path: resources/
-      ignore:
-        - node_modules/
-        - .npmrc
-        - .cache/
-        - .DS_Store
-        - test/
-    ###########################################################################
-    # 4) HTML5 UI Modules
-    ###########################################################################
-  - name: capexdemocapexdemocapexrequest
-    type: html5
-    path: app/capexdemo.capexrequest
-    build-parameters:
-      build-result: dist
-      builder: custom
-      commands:
-        - npm ci
-        - npm run build
-      ignore:
-        - node_modules/
-        - .npmrc
-        - .cache/
-        - .DS_Store
-        - test/
-      supported-platforms:
-        []
-    ###########################################################################
-    # 4)Destinatiopn c
-    ###########################################################################
-  - name: capexdemo-destination-content
-    type: com.sap.application.content
-    requires:
-      - name: capexdemo-auth
-        parameters:
-          service-key:
-            name: capexdemo-auth-key
-      - name: capexdemo-html5-repo-host
-        parameters:
-          service-key:
-            name: capexdemo-html5-repo-host-key
-      - name: srv-api
-      - name: capexdemo-destination-service
-        parameters:
-          content-target: true
-    build-parameters:
-      no-source: true
-    parameters:
-      content:
-        instance:
-          existing_destinations_policy: update
-          destinations:
-            - Name: capexdemo_html5_repository
-              ServiceInstanceName: capexdemo-html5-repo-host
-              ServiceKeyName: capexdemo-html5-repo-host-key
-              sap.cloud.service: capexdemo.service
-            - Name: capexdemo-auth
-              Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: capexdemo-auth
-              ServiceKeyName: capexdemo-auth-key
-              sap.cloud.service: capexdemo.service
-          
-
-    ###########################################################################
-    # 4) App router
-    ########################################################################### 
-  - name: capexdemo
-    type: approuter.nodejs
-    path: app/router
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 512M
-      memory: 512M
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
-      - name: capexdemo-auth
-      - name: capexdemo-html5-runtime
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
- 
-resources:
-  - name: capexdemo-auth
-    type: org.cloudfoundry.managed-service
-    parameters:
-      path: ./xs-security.json
-      service: xsuaa
-      service-plan: application   
-      config:
-        xsappname: capexdemo-dev    
-        tenant-mode: dedicated        
-        oauth2-configuration:
-          credential-types:
-            - binding-secret
-            - x509
-          redirect-uris:
-            - https://*~{app-api/app-uri}/**
-        role-collections:
-          - name: 'admin (capexdemo - admin)'
-            description: 'generated'
-            role-template-references:
-              - '$XSAPPNAME.admin'
-    requires:
-      - name: app-api
-     ###########################################################################
-    # 4) HDI Container
-    ########################################################################### 
-  - name: capexdemo-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
-
-  ###########################################################################
-    # 4) HTML Repo
-  ########################################################################### 
-  - name: capexdemo-html5-repo-host
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-host
-  ###########################################################################
-    # 4) HTML Repo
-  ########################################################################### 
-  - name: capexdemo-html5-runtime
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: html5-apps-repo
-      service-plan: app-runtime
-  ###########################################################################
-    # 4) HTML Repo
-  ########################################################################### 
-  - name: capexdemo-destination-service
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-      config:
-        HTML5Runtime_enabled: true
-        init_data:
-          instance:
-            existing_destinations_policy: update          
-            destinations:
-              - Authentication: NoAuthentication
-                Name: ui5
-                ProxyType: Internet
-                Type: HTTP
-                URL: https://ui5.sap.com
-              - Name: srv-api
-                Authentication: NoAuthentication
-                HTML5.DynamicDestination: true
-                HTML5.ForwardAuthToken: true
-                ProxyType: Internet
-                Type: HTTP
-                URL: ~{srv-api/srv-url}
-    requires:
-      - name: srv-api
-  ###########################################################################
-    # 4) HTML Repo
-  ########################################################################### 
-  - name: capexdemo-connectivity
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: connectivity
-      service-plan: lite
-
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
